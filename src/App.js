@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
+import oniClientAuth from "./services/oni-client-auth";
 import './App.css';
 
+const authDialog = (oniAuth) => {
+    window.location.replace(oniAuth.authorization_url);
+}
+
 function App() {
+
+
+    useEffect(() => authDialog(oniAuth));
+
   return (
     <div className="App">
       <header className="App-header">
