@@ -1,23 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import oniClientAuth from "./services/oni-client-auth";
 import './App.css';
 
-const authDialog = (oniAuth) => {
-    window.location.replace(oniAuth.authorization_url);
+
+const processAuth = (oniAuth) => {
+  const _url = new URL(window.location.href);
+  console.log(`url: ${_url}`);
+  launchAuthDialogue(oniAuth.authorization_url);
+}
+
+const launchAuthDialogue = (url) => {
+  window.location.replace(url);
 }
 
 function App() {
+  const [_oniAuth] = useState(new oniClientAuth());
+  const [accessCode] = useState("");
 
-
-    useEffect(() => authDialog(oniAuth));
+  useEffect(() => {
+    processAuth(_oniAuth);
+  }, [accessCode, _oniAuth]);
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
