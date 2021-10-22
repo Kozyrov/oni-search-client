@@ -1,9 +1,11 @@
-import React,{ useState } from "react"
+import React from "react"
 
-export const Results = (props) => {
+const Results = () => {
   return (
     <div>
       search results placeholder
     </div>
   )
 }
+
+export default Results; 
