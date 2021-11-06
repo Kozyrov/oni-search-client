@@ -14,13 +14,13 @@ const Search = () => {
     }
 
     return (
-        <form className="search-field" onSubmit={handleSubmit}>
+        <form className="search-field" aria-label="Search component" onSubmit={handleSubmit}>
             <label>Search for anime by title:</label>
             <input 
                 type="search"
                 id="title-search-input"
                 placeholder="What Anime are you looking for?"
-                aria-label="Search for anime based on title"
+                aria-label="Search input"
                 value={value}
                 onInput={handleInput}
             ></input>
