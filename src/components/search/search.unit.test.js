@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import Search from './Search';
+import * as searchAPIMock from  './searchAPI';
 
 describe("search input", () => {
   it("should render without breaking", () => {
@@ -8,14 +9,29 @@ describe("search input", () => {
     expect(screen.findByLabelText("Search input")).not.toBeNull();
   });
 
-  it("should trigger search on 'enter'", () => {
-    render(<Search />);
+  it("should call searchByTitle on key 'enter'", () => {
+    
+    searchAPIMock.mockImplementation(() => {
+      return {
+        searchByTitle: jest.fn()
+      }
+    });
 
-    const searchComponent = screen.findByLabelText("Search component");
+    render(<Search />);
 
     fireEvent.keyPress(searchComponent, {key: 'Enter', code: 'Enter', charCode: 13});
     
-
-    expect()
+    expect
+    
   })
+
+  it("Should handle inputs", () => {
+    const inputField = screen.findByLabelText("Search input");
+
+    fireEvent.keyPress(inputField, {target: {value: "anyvalue"}});
+
+    expect(inputField).toContain("anyvalue");
+  })
+
+  
 }) 
